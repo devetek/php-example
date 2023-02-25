@@ -8,6 +8,16 @@ setup:
   language:
     name: php
     version: 5.6
+  # UNRELEASED - Under Development
+  router:
+    framework: laravel
+    routing: # adding additional router to the vHost
+      - path: /\.(?:png|jpg|jpeg|gif|html)$ # if upstream not defined, fallback to file serving by default
+        directory: /home/<username>/<appname>
+      - path: /example
+        upstream: localhost:8000
+      - path: /
+        upstream: localhost:8000
 
 build:
   target:
@@ -47,7 +57,7 @@ build:
 
 
 # Used to release application version to github release version
-# Unreleased - under development
+# UNRELEASED - Under Development
 # release:
 #   command:
 #     - ./deployment-tasks.sh

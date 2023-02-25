@@ -1,6 +1,6 @@
-## Deskripsi
+## Description
 
-Contoh minimal definisi aplikasi cloud devetek. Dengan satu bahasa pemrograman tanpa dependency.
+Contoh yaml definisi untuk aplikasi PHP dapat berjalan di cloud devetek.
 
 ## Definition
 
@@ -19,3 +19,7 @@ Definisi yang digunakan untuk melakukan release aplikasi ke repository release
 ### Run
 
 Definisi yang digunakan untuk membuat systemd service ke dalam mesin, jika build.target.machine terdefinisikan
+
+## References
+
+- [Heroku Docker Definition](https://blog.heroku.com/build-docker-images-heroku-yml)
