@@ -64,7 +64,7 @@ build:
 #   version: ${VERSION}
 
 # Use for applications that run independently
-# if your PHP applications, use php-fpm, comment block run and use dcloud routing template instead
+# if your PHP applications, use php-fpm, comment block run and use dcloud routing template instead in block setup router
 # rules:
 # working directory will set default to /home/<username>/<appname>
 run:
