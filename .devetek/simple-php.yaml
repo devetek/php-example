@@ -48,7 +48,7 @@ build:
         - source: index.php
       command: |
         ./
-        echo "www";
+        echo "www"
       # environment:
       #   - key: ENVIRONMENT
       #     value: ${ENVIRONMENT}
