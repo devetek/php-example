@@ -1,4 +1,5 @@
 # Cloud Devetek Standard Definition v0.0.1-alpha.0 Example
+version: v0.0.1-alpha.0
 
 # Setup environemnt for build, release and / or  running
 # Resources to provision on app creation (database, redis, pubsub, etc)
