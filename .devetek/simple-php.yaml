@@ -8,9 +8,9 @@ setup:
   language:
     name: php
     version: 5.6
-  # UNRELEASED - Under Development
   router:
     framework: laravel
+    # UNRELEASED - Under Development
     routing: # adding additional router to the vHost
       - path: /\.(?:png|jpg|jpeg|gif|html)$ # if upstream not defined, fallback to file serving by default
         directory: /home/<username>/<appname>
@@ -30,7 +30,7 @@ build:
     #     value: ${ENVIRONMENT}
     #   - key: HOST
     #     value: ${HOST}
-  
+
     ## -> Build app non docker (tar.gz)
     machine: # exec sequentially
       workdir: .
@@ -55,7 +55,6 @@ build:
       #   - key: HOST
       #     value: ${HOST}
 
-
 # Used to release application version to github release version
 # UNRELEASED - Under Development
 # release:
@@ -72,7 +71,7 @@ run:
   description: Custom App Description
   command: php -S localhost:8000 index.php
   environment:
-  - key: ENVIRONMENT
-    value: ${ENVIRONMENT}
-  - key: HOST
-    value: ${HOST}
+    - key: ENVIRONMENT
+      value: ${ENVIRONMENT}
+    - key: HOST
+      value: ${HOST}
