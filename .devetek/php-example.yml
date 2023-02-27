@@ -35,26 +35,34 @@ build:
     ## -> Build app non docker (tar.gz)
     machine: # exec sequentially
       workdir: .
-      # if to is not defined, set to /home/<username>/<appname>
-      # to rules:
-      # - relative folder: . => /home/<username>/<appname>
-      # - relative folder: ./demo => /home/<username>/<appname>
-      # is_file rules:
-      # - file without extension by default will be treat as folder
-      # - if is_file true, will create directory target if not exist
-      copy:
-        - source: ./public
-          to: ./public
-          is_file: false
-        - source: index.php
-      command: |
-        ./
-        echo "www"
-      # environment:
-      #   - key: ENVIRONMENT
-      #     value: ${ENVIRONMENT}
-      #   - key: HOST
-      #     value: ${HOST}
+      steps:
+        - name: "Pre Build Command"
+          command: |
+            echo "Preparing..."
+        # if to is not defined, set to /home/<username>/<appname>
+        # to rules:
+        # - relative folder: . => /home/<username>/<appname>
+        # - relative folder: ./demo => /home/<username>/<appname>
+        # is_file rules:
+        # - file without extension by default will be treat as folder
+        # - if is_file true, will create directory target if not exist
+        - name: "Copy File Pre Build"
+          copy:
+            - source: ./public
+              to: ./public
+              is_file: false
+            - source: index.php
+        - name: "Build Command"
+          command: echo "Building..."
+        - name: "Post Build Command"
+          command:
+            - echo "Almost finish..."
+            - echo "Finished..."
+      environment:
+        - key: ENVIRONMENT
+          value: ${ENVIRONMENT}
+        - key: HOST
+          value: ${HOST}
 
 # Used to release application version to github release version
 # UNRELEASED - Under Development
