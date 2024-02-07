@@ -79,7 +79,7 @@ build:
 # rules:
 # working directory will set default to /home/<username>/<appname>
 run:
-  name: Custom App Name
+  name: PHP with DB App
   description: Custom App Description
   command: php -S localhost:8000 index.php
   environment:
