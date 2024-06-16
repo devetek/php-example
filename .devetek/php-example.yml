@@ -1,89 +1,26 @@
-# Cloud Devetek Standard Definition v0.0.1-alpha.0 Example
+# Cloud Devetek Standard Definition v0.0.1-alpha.0 Go Example
 version: v0.0.1-alpha.0
 
-# Setup environemnt for build, release and / or  running
-# Resources to provision on app creation (database, redis, pubsub, etc)
-# Build machine will pick from registered app in cloud.devetek.com
-# if during build and test not pass, will send status failed to the dashboard
 setup:
   language:
     name: php
-    version: 5.6
-  router:
-    framework: laravel
-    # UNRELEASED - Under Development
-    access: public # access: public / internal / localhost
-    port: 8900 # default 80 for internal, 443 for public
-    routing: # adding additional router to the vHost
-      - path: /\.(?:png|jpg|jpeg|gif|html)$ # if upstream not defined, fallback to file serving by default
-        directory: /home/<username>/<appname>
-      - path: /example
-        upstream: localhost:8000
-      - path: /
-        upstream: localhost:8000
+    version: 8.2
 
 build:
   target:
-    ## -> Build app with docker - coming soon!
-    # docker:
-    #   workdir: .
-    #   dockerfile: Dockerfile
-    # environment:
-    #   - key: ENVIRONMENT
-    #     value: ${ENVIRONMENT}
-    #   - key: HOST
-    #     value: ${HOST}
-
     ## -> Build app non docker (tar.gz)
     machine: # exec sequentially
       workdir: .
       steps:
-        - name: "Pre Build Command"
-          command: |
-            echo "Preparing..."
-        # if to is not defined, set to /home/<username>/<appname>
-        # to rules:
-        # - relative folder: . => /home/<username>/<appname>
-        # - relative folder: ./demo => /home/<username>/<appname>
-        # is_file rules:
-        # - file without extension by default will be treat as folder
-        # - if is_file true, will create directory target if not exist
-        - name: "Copy File Pre Build"
-          copy:
-            - source: ./public
-              to: ./public
-              is_file: false
-            - source: index.php
-        - name: "Build Command"
-          command: echo "Building..."
-        - name: "Post Build Command"
-          command:
-            - echo "Almost finish..."
-            - echo "Finished..."
-      environment:
-        - key: ENVIRONMENT
-          value: ${ENVIRONMENT}
-        - key: HOST
-          value: ${HOST}
+        - name: "build application"
+          cmd:
+            - echo "No need to build"
+        # This step will be active when you enable artifact upload configuration to the storage.
+        - name: "archive file to tarball when app alrady have bucket configuration"
+          archive:
+            - ./index.php
 
-# Used to release application version to github release version
-# UNRELEASED - Under Development
-# release:
-#   use: uuid # use (git-tag / date / uuid / git-commit)
-#   command: # if command exist, it will override git default git flow
-#     - ./release-tasks.sh
-#   version: ${VERSION}
-
-# Use for applications that run independently
-# if your PHP applications, use php-fpm, comment block run and use dcloud routing template instead in block setup router
-# rules:
-# working directory will set default to /home/<username>/<appname>
 run:
-  name: Custom App Name
-  description: Custom App Description
-  command: php -S localhost:8000 index.php
-  environment:
-    - key: ENVIRONMENT
-      value: ${ENVIRONMENT}
-    - key: HOST
-      value: ${HOST}
+  name: php-example-app
+  description: My first PHP example deploy from cloud.terpusat.com
+  command: php8.2 -S 0.0.0.0:8000

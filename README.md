@@ -1,25 +1,26 @@
 ## Description
 
-Contoh yaml definisi untuk aplikasi PHP dapat berjalan di cloud devetek.
+Contoh aplikasi PHP untuk dapat di release melalui [dPanel](https://cloud.terpusat.com/). Lihat pengaturan yang ada di dalam folder `.devetek`.
 
-## Definition
+## Komponen Utama
 
-### Setup
+Di dalam pengaturan YAML, ada 3 komponen utama yang perlu diperhatikan untuk dapat melakukan release aplikasi melalui dPanel:
 
-Definisi untuk menentukan environment yang digunakan dalam proses build, release dan run
+### setup
 
-### Build
+Komponen ini digunakan untuk memvalidasi ketersediaan dependency aplikasi untuk dapat berjalan. Digunakan untuk bahasa pemrograman interpreter seperti (PHP, Python, Rubby, Javascript, etc).
 
-Definisi yang berjalan untuk melakukan proses pembuatan aplikasi hingga siap dijalankan di production
+### build
 
-### Release - BETA
+Komponen ini digunakan untuk medefinisikan step-step yang akan dijalankan selama proses build. Menggunakan working directory dimana aplikasi di tarik dari sumber (github, bitbucket, gitlab, etc). Terdapat 2 definisi yang tersedia:
 
-Definisi yang digunakan untuk melakukan release aplikasi ke repository release
+- cmd - Digunakan untuk mengeksekusi command yang dimasukkan
+- archive - Digunakan untuk melakukan archiving target yang telah didefinisikan. Untuk didistribusikan ke penyimpanan sehingga dapat digunakan untuk banyak resource
 
-### Run
+### run
 
-Definisi yang digunakan untuk membuat systemd service ke dalam mesin, jika build.target.machine terdefinisikan
+Komponen ini digunakan untuk mendefinisikan pengaturan runtime aplikasi. Komponen utama yang perlu diperhatikan diantaranya:
 
-## References
-
-- [Heroku Docker Definition](https://blog.heroku.com/build-docker-images-heroku-yml)
+- name - Digunakan untuk membuat nama service di dalam mesin, hanya diperbolehkan menggunakan "-" sebagai pemisah kata
+- description - Digunakan untuk membuat deskripsi aplikasi agar lebih mudah dimengerti
+- command - Perintah yang akan digunakan untuk menjalankan aplikasi, relative terhadap working directory dimana aplikasi ditarik dari sumber (github, bitbucket, gitlab, etc).
